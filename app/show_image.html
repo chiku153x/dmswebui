@@ -22,7 +22,7 @@
             $(document).ready(function() {
                 var urlParams = new URLSearchParams(window.location.search);
                 var doc = dmsUIBaseUrl + "/doc/" + urlParams.get('instance') + "/" + urlParams.get('screen') + "/" + urlParams.get('number') + "/" + urlParams.get('docName');
-                $("#doc-iframe").attr("src",doc);                
+                $("#doc-img").attr("src",doc);                
             });
         </script>
     </body>
