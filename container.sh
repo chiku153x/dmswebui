@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
-TAG=dmswebui:latest
+if [[ -z "${D_TAG_VERSION}" ]]; then
+	TAG=dmswebui:latest
+else
+	TAG=dmswebui:${D_TAG_VERSION}
+fi
 NAME=webui
 docker rm -f ${NAME} || true
 docker run -d --name ${NAME} \
