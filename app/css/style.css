@@ -1,6 +1,6 @@
-* {font-size:12px}
-body{margin-left:10px}
-.head-row{background-color:#1bbba4;color:#fff}
+* {font-size:12px;}
+body{margin-left:10px;}
+.head-row{background-color:#1bbba4;color:#fff;}
 .custom-link{
     cursor: pointer;
     color: cadetblue;
@@ -9,6 +9,7 @@ body{margin-left:10px}
 
 #goback{
     margin:5px;
+    background-color:#1bbba4;color:#fff;
 }
 
 
