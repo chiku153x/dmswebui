@@ -13,7 +13,7 @@
     <body>
         <div><button type="button" class="btn btn-dark" id="goback">Back</button></div>
         <div id="canvas"></div>
-        <div id="pdfRenderer"></div>
+        <div id="pdfRenderer" class="pdfobject-container"></div>
         <script src="js/jquery-3.1.1.min.js"></script>
         <script src="js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
@@ -25,13 +25,7 @@
             $(document).ready(function() {
                 var urlParams = new URLSearchParams(window.location.search);
                 var pdf = dmsUIBaseUrl + "/doc/" + urlParams.get('instance') + "/" + urlParams.get('screen') + "/" + urlParams.get('number') + "/" + urlParams.get('docName');
-                var pdfObj = new PDFObject({
-                url: pdf,
-                id: "pdfRendered",
-                pdfOpenParams: {
-                    view: "FitH"
-                }
-                }).embed("pdfRenderer");
+                PDFObject.embed(pdf,"#pdfRenderer");
             });
         </script>
     </body>
