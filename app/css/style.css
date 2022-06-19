@@ -4,6 +4,7 @@ th{color:#fff}
 .custom-link{
     cursor: pointer;
     color: cadetblue;
+    text-decoration: underline;
 }
 
 #goback{
