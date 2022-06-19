@@ -1,6 +1,6 @@
 function getData(number){
     $.getJSON(dmsRestUrl + '/api/v1/document/related/' + number, {q:'yuilkjhgfdsfghjkuytresdcvbnjytrdfgbhjtyrfdvcbnjhtyrgfbvn'}, function (data, textStatus, jqXHR){
-        var tbl = "<table class='table'><tr><th>No</th><th>Category</th><th>Subject</th><th>Document Name</th><th>Created Date</th><th>Actions</th></tr>";
+        var tbl = "<table class='table'><tr class='head-row'><th>No</th><th>Category</th><th>Subject</th><th>Document Name</th><th>Created Date</th><th>Actions</th></tr>";
         var i = 1;
         for(let x in data){
             var d = data[x];
