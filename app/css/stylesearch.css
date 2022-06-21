@@ -1,0 +1,27 @@
+body{margin-left:0;}
+
+
+/* .bg-dark{
+    background-color:#1bbba4!important;color:#fff;
+} */
+
+.top-right-nav{
+    position: absolute;right: 10px;
+    color:#fff;
+}
+.logout{
+    cursor: pointer;
+    
+}
+
+.ms-n5 {
+    margin-left: -40px;
+}
+
+.mg-r10{
+    margin-left: 10px;
+}
+
+.actions{
+    cursor: pointer;
+}

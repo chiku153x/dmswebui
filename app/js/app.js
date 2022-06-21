@@ -1,5 +1,5 @@
 function getData(number){
-    $.getJSON(dmsRestUrl + '/api/v1/document/related/' + number, {q:'yuilkjhgfdsfghjkuytresdcvbnjytrdfgbhjtyrfdvcbnjhtyrgfbvn'}, function (data, textStatus, jqXHR){
+    $.getJSON(dmsRestUrl + '/api/v1/document/related/' + number, {q:'0987654321'}, function (data, textStatus, jqXHR){
         var tbl = "<table class='table'><tr class='head-row'><td>No</td><td>Category</td><td>Subject</td><td>Document Name</td><td>Created Date</td><td>Actions</td></tr>";
         var i = 1;
         for(let x in data){
