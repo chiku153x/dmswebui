@@ -71,13 +71,14 @@ $(document).ready(function() {
 
 function docView(instance,screen,number,docName){           
     //var path =  dmsUIBaseUrl + "/doc/" + instance + "/" + screen + "/" + number + "/" + docName;
-    var path = dmsFileSrvUrl + "/doc/" + instance + "/" + screen + "/" + number + "/" + docName;
+    var path = dmsFileSrvUrl + "/" + instance + "/" + screen + "/" + number + "/" + docName;
     window.open(path);
 }
 
 
 function docDownload(instance,screen,number,docName){           
-    var path =  dmsUIBaseUrl + "/doc/" + instance + "/" + screen + "/" + number + "/" + docName;
+    //var path =  dmsUIBaseUrl + "/" + instance + "/" + screen + "/" + number + "/" + docName;
+    var path =  dmsFileSrvUrl + "/" + instance + "/" + screen + "/" + number + "/" + docName;
     var save = document.createElement('a');
         save.href = path;
         save.target = '_blank';

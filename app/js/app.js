@@ -24,7 +24,7 @@ function openDoc(obj){
     // }else{
     //     path = "show_image.html?instance=" + doc['instance'] + "&screen=" + doc['screen'] + "&number=" + doc['number'] + "&docName=" + doc['docName'];
     // }
-    path=dmsFileSrvUrl + "/doc/" + doc['instance'] + "/" + doc['screen'] + "/" + doc['number'] + "/" + doc['docName'];
+    path=dmsFileSrvUrl + "/" + doc['instance'] + "/" + doc['screen'] + "/" + doc['number'] + "/" + doc['docName'];
     
     window.location.href=path;
 }
