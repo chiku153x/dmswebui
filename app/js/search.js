@@ -70,7 +70,8 @@ $(document).ready(function() {
 
 
 function docView(instance,screen,number,docName){           
-    var path =  dmsUIBaseUrl + "/doc/" + instance + "/" + screen + "/" + number + "/" + docName;
+    //var path =  dmsUIBaseUrl + "/doc/" + instance + "/" + screen + "/" + number + "/" + docName;
+    var path = dmsFileSrvUrl + "/doc/" + instance + "/" + screen + "/" + number + "/" + docName;
     window.open(path);
 }
 

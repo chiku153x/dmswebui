@@ -19,11 +19,12 @@ function openDoc(obj){
     console.log(obj);
     var doc = obj;
     var path = "";
-    if(obj['docType'] == "pdf"){
-        path = "show_doc.html?instance=" + doc['instance'] + "&screen=" + doc['screen'] + "&number=" + doc['number'] + "&docName=" + doc['docName'];
-    }else{
-        path = "show_image.html?instance=" + doc['instance'] + "&screen=" + doc['screen'] + "&number=" + doc['number'] + "&docName=" + doc['docName'];
-    }
+    // if(obj['docType'] == "pdf"){
+    //     path = "show_doc.html?instance=" + doc['instance'] + "&screen=" + doc['screen'] + "&number=" + doc['number'] + "&docName=" + doc['docName'];
+    // }else{
+    //     path = "show_image.html?instance=" + doc['instance'] + "&screen=" + doc['screen'] + "&number=" + doc['number'] + "&docName=" + doc['docName'];
+    // }
+    path=dmsFileSrvUrl + "/doc/" + doc['instance'] + "/" + doc['screen'] + "/" + doc['number'] + "/" + doc['docName'];
     
     window.location.href=path;
 }
