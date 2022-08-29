@@ -9,8 +9,12 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/stylesearch.css">
     <link rel="stylesheet" href="css/dataTables.bootstrap4.min.css">
-  
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     <title>DMS | Search</title>
+    <style>
+      .bt{float:right;background-color: #343a40!important;color: #fff!important;}
+    </style>
   </head>
   <body>
 
@@ -23,7 +27,7 @@
 
   <!-- Search box starts -->
   <div class="container py-4">
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-md-5 mx-auto">
             <div class="input-group">
                 <input class="form-control border-end-0 border rounded-pill" type="search" placeholder="Search" id="searchBox">
@@ -34,11 +38,103 @@
                 </span>
             </div>
         </div>
+    </div> -->
+    <div class="container py-4">
+      <form style="width:100%">
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="screen">Screen</label>
+              <select id="screen" class="form-control">
+                <option selected value="-1">Choose...</option>
+                <option value="0">Customer</option>
+                <option value="1">Supplier</option>
+                <option value="2">Product</option>
+                <option value="77">Work Order</option>
+                <option value="32">Sales Order</option>
+                <option value="35">Sales Packing Slip</option>
+                <option value="36">Sales Invoice</option>
+                <option value="42">Purchase Order</option>
+                <option value="45">Purchasing Packing Slip</option>
+                <option value="46">Purchasing Invoice</option>
+                <option value="143">Lot</option>
+              </select>
+            </div>
+
+
+            <div class="form-group col-md-4">
+              <label for="category">Category</label>
+              <select id="category" class="form-control" disabled>
+                <option selected value="-1">Choose...</option>
+                <option value="1">a</option>
+                <option value="2">b</option>
+                <option value="3">c</option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-4">
+              <label for="subject">Subject</label>
+              <input type="text" class="form-control" id="subject" placeholder="Subject">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="docno">Object Number</label>
+              <input type="text" class="form-control" id="objno" placeholder="Object Number">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="filename">File Name</label>
+              <input type="text" class="form-control" id="filename" placeholder="File Name">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="filetype">File Type</label>
+              <select id="filetype" class="form-control">
+                <option selected value="-1">Choose...</option>
+                <option value="1">pdf</option>
+                <option value="2">doc/docx</option>
+                <option value="3">xls/xlsx</option>
+              </select>
+            </div>
+          </div>
+
+
+
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="keywords">Key Words</label>
+              <input type="text" class="form-control" id="keywords" placeholder="Key Words" disabled>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="datefrom">Date From</label>
+              <input type="text" class="form-control" id="datefrom" placeholder="Date From" disabled>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="dateto">Date To</label>
+              <input type="text" class="form-control" id="dateto" placeholder="Date To" disabled>
+            </div>
+          </div>
+
+
+
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              &nbsp;
+            </div>
+            <div class="form-group col-md-4">
+              &nbsp;
+            </div>
+            <div class="form-group col-md-4">
+              <input type="button" class="form-control col-md-4 bt" id="btnload" value="Load" >
+              <input type="button" class="form-control col-md-4 bt" id="btnclear" value="Clear" >
+            </div>
+          </div>
+          
+      </form>
     </div>
   </div>
 
   <!-- Search box ends -->
-  <div class="container py-4">
+  <div class="container py-4" style="margin-top: -60px;">
     <div class="row">
       <div class="col-md-12 mx-auto">
         <div class="table-responsive" id="data">
@@ -76,6 +172,31 @@
     <script src="js/pdfobject.min.js"></script>
     <script src="js/app-constant.js"></script>
     <script src="js/search.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 
+    <script>
+      
+      $( document ).ready(function() {
+        $('#datefrom').daterangepicker(
+          {
+              locale: {
+                format: 'YYYY-MM-DD'
+              },
+              singleDatePicker: true,
+              showDropdowns: true,
+          }
+       );
+       $('#dateto').daterangepicker(
+          {
+              locale: {
+                format: 'YYYY-MM-DD'
+              },
+              singleDatePicker: true,
+              showDropdowns: true,
+          }
+       );
+      });
+    </script>
 </body>
 </html>
