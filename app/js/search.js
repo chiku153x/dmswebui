@@ -18,7 +18,7 @@ var dataTableObj;
 
 
 $('#btnload').click(function(){
-    var searchText = $('#screen').val() + "~" + $('#filename').val() + "~" + $('#filetype').val() + "~" + $('#objno').val() + "~" + $('#datefrom').val() + "~" + $('#dateto').val() + "~" + $('#category').val() + "~" + $('#subject').val();
+    var searchText = $('#screen').val() + "~" + $('#filename').val() + "~" + $('#filetype').val() + "~" + $('#objno').val() + "~" + $('#datefrom').val() + "~" + $('#dateto').val() + "~" + $('#category').val() + "~" + $('#subject').val() + "~END";
     if(searchText == ""){ searchText = "ALL";}
     dataTableObj.destroy();
     dataTableObj = $('#dataTable').DataTable(
@@ -35,9 +35,10 @@ $('#btnload').click(function(){
 
 $(document).ready(function() {
     var urlParams = new URLSearchParams(window.location.search);
+    $('#userName').text(urlParams.get('user'));
     dataTableObj = $('#dataTable').DataTable(
         {
-            ajax: dmsRestUrl + '/api/v1/document/search/ALL' ,
+            ajax: dmsRestUrl + '/api/v1/document/search/-1~~-1~~~~~~~~END' ,
             "oLanguage": {
 
                 "sSearch": "Filter :"
