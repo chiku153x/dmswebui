@@ -21,43 +21,18 @@
   <!-- Nav bar starts -->
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <a class="navbar-brand" href="#">DMS</a>
-    <div class="top-right-nav">Hi <strong id="userName"></strong> | <span class="logout">Logout</span></div>
+    <div class="top-right-nav">Hi <strong id="userName"></strong></div>
   </nav>
   <!-- Nave bar ends -->
 
   <!-- Search box starts -->
   <div class="container py-4">
-    <!-- <div class="row">
-        <div class="col-md-5 mx-auto">
-            <div class="input-group">
-                <input class="form-control border-end-0 border rounded-pill" type="search" placeholder="Search" id="searchBox">
-                <span class="input-group-append">
-                    <button class="btn btn-outline-secondary bg-dark border-bottom-0 border rounded-pill mg-r10" type="button" id="btnSearch">
-                        Go
-                    </button>
-                </span>
-            </div>
-        </div>
-    </div> -->
     <div class="container py-4">
       <form style="width:100%">
           <div class="form-row">
             <div class="form-group col-md-4">
               <label for="screen">Screen</label>
-              <select id="screen" class="form-control">
-                <option selected value="-1">Choose...</option>
-                <option value="0">Customer</option>
-                <option value="1">Supplier</option>
-                <option value="2">Product</option>
-                <option value="77">Work Order</option>
-                <option value="32">Sales Order</option>
-                <option value="35">Sales Packing Slip</option>
-                <option value="36">Sales Invoice</option>
-                <option value="42">Purchase Order</option>
-                <option value="45">Purchasing Packing Slip</option>
-                <option value="46">Purchasing Invoice</option>
-                <option value="143">Lot</option>
-              </select>
+              <div id='screen_pl'></div>
             </div>
 
 
@@ -79,8 +54,8 @@
 
           <div class="form-row">
             <div class="form-group col-md-4">
-              <label for="docno">Object Number</label>
-              <input type="text" class="form-control" id="objno" placeholder="Object Number">
+              <label for="docno">Number</label>
+              <input type="text" class="form-control" id="objno" placeholder="Number">
             </div>
             <div class="form-group col-md-4">
               <label for="filename">File Name</label>
@@ -93,6 +68,7 @@
                 <option value="1">pdf</option>
                 <option value="2">doc/docx</option>
                 <option value="3">xls/xlsx</option>
+                <option value="4">png/jpg/bmp</option>
               </select>
             </div>
           </div>
@@ -102,15 +78,15 @@
           <div class="form-row">
             <div class="form-group col-md-4">
               <label for="keywords">Key Words</label>
-              <input type="text" class="form-control" id="keywords" placeholder="Key Words" disabled>
+              <input type="text" class="form-control" id="keywords" placeholder="Key Words">
             </div>
             <div class="form-group col-md-4">
               <label for="datefrom">Date From</label>
-              <input type="text" class="form-control" id="datefrom" placeholder="Date From" disabled>
+              <input type="text" class="form-control" id="datefrom" placeholder="Date From" >
             </div>
             <div class="form-group col-md-4">
               <label for="dateto">Date To</label>
-              <input type="text" class="form-control" id="dateto" placeholder="Date To" disabled>
+              <input type="text" class="form-control" id="dateto" placeholder="Date To" >
             </div>
           </div>
 
@@ -143,12 +119,13 @@
               <thead>
                 <tr>
                   <td>No</td>
-                  <td>Object Number</td>
+                  <td>Number</td>
                   <td>Screen</td>
                   <td>Category</td>
                   <td>Subject</td>
                   <td>Document Name</td>
                   <td>Created Date</td>
+                  <td>Keywords</td>
                   <td>Actions</td>
                 </tr>
               </thead>
