@@ -48,9 +48,9 @@ $(document).ready(function() {
     );
 
     $.getJSON(dmsRestUrl + '/api/v1/screen/get', {q:'0987654321'}, function (sdata, stextStatus, sjqXHR){
-        console.log(sdata);
+        
         $.getJSON(dmsRestUrl + '/api/v1/permission/get/' +urlParams.get('user'), {q:'0987654321'}, function (data, textStatus, jqXHR){
-            var tbl = '<select id="screen" class="form-control"><option selected value="-1">Choose...</option>';
+            var tbl = '<select id="screen" class="form-control" onChange="screenChange(this);"><option selected value="-1">Choose...</option>';
             var i = 1;
             for(let x in data){
                 var d = data[x];
@@ -112,3 +112,22 @@ $('#btnclear').click(function(){
         }
      );
 });
+
+
+function screenChange(obj){
+    $.getJSON(dmsRestUrl + '/api/v1/type/get/' , {q:'0987654321'}, function (tdata, ttextStatus, tjqXHR){
+        var tbl = '<select id="category" class="form-control"><option selected value="-1">Choose...</option>';
+        var i = 1;
+        for(let x in tdata){
+            var d = tdata[x];
+            if(d['screenNo'] == obj.value){
+                tbl = tbl + '<option value="'+d['itemNo']+'">'+d['itemText']+'</option>';
+            }
+
+            console.log(d);
+            i++;
+        }
+        tbl = tbl + "</select>";
+        $("#category_pl").html(tbl);
+    });
+  }
