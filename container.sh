@@ -11,5 +11,6 @@ docker run -d --name ${NAME} \
 	-e DMS_REST_URL=http://192.168.1.71:8080 \
 	-e DMS_UI_BASE_URL=http://192.168.1.71:8081 \
 	-e DMS_FILE_SRV_URL=http://192.168.1.71:3000 \
+	-e DMS_MANDANT=demo \
 	${TAG}
 

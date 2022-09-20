@@ -34,6 +34,7 @@ $('#btnload').click(function(){
 });
 
 $(document).ready(function() {
+    $('#mandantName').text(dmsMandant);
     var urlParams = new URLSearchParams(window.location.search);
     $('#userName').text(urlParams.get('user'));
     dataTableObj = $('#dataTable').DataTable(
