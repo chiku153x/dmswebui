@@ -1,5 +1,6 @@
 FROM nginx:1.16-alpine
 USER root
+RUN echo "11.11.22_1"
 RUN apk add --no-cache --update python3
 COPY default /etc/nginx/sites-available/default
 WORKDIR /usr/share/nginx/html

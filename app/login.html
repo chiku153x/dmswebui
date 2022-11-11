@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/stylesearch.css">
+    <link rel="stylesheet" href="css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="css/daterangepicker.css" />
+    <!-- <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet"> -->
+    <title>DMS | Login</title>
+    <style>
+      .bt{float:right;background-color: #1bbba4!important;color: #fff!important;}
+      .page-item.active .page-link {background-color: #343a40!important;color: #fff!important;}
+      .upperc{text-transform: uppercase;}
+      #logout{cursor: pointer;}
+      #mandantName{
+        color: #1bbba4!important
+      }
+    </style>
+  </head>
+  <body>
+
+  <!-- Nav bar starts -->
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand" href="#">DMS&nbsp;<strong id="mandantName" style="font-size: 10px;"></strong></a>
+    <div class="top-right-nav upperc"><strong id="userName">Guest</strong> | <strong id="logout">Logout</strong></div>
+  </nav>
+  <!-- Nave bar ends -->
+
+  <!-- Search box starts -->
+  <div class="container py-4">
+    <div class="container" style="width:500px">
+      <form>
+          
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="username">User Name</label>
+              <input type="text" class="form-control" id="username" placeholder="username">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" placeholder="password">
+            </div>
+          </div>
+
+
+
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <input type="button" class="form-control col-md-4 bt" id="btnLogin" value="Login" >
+            </div>
+          </div>
+          
+      </form>
+    </div>
+  </div>
+
+    
+
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.dataTables.min.js"></script>
+    <script src="js/dataTables.bootstrap4.min.js"></script>
+    
+    
+    <script src="js/url-search-params.js"></script>
+    <script src="js/pdfobject.min.js"></script>
+    <script src="js/app-constant.js"></script>
+    <script type="text/javascript" src="js/moment.min.js"></script>
+    <script type="text/javascript" src="js/daterangepicker.js"></script>
+
+    <script>
+      
+      $( document ).ready(function() {
+       $('#mandantName').text(dmsMandant);
+       $('#btnLogin').click(function(){
+         $.ajax(dmsRestUrl + '/token' , {
+              //data: JSON.stringify({'userName':$('#username').val(),'password':$('#password').val()}),
+              data: '{"null":"null"}',
+              contentType: 'application/json',
+              headers: {
+                "Authorization": "Basic " + btoa($('#username').val() + ":" + $('#password').val())
+              },
+              type: 'POST',
+              success: function (data,textStatus, xhr){
+                 console.log(xhr.status);
+                 if(xhr.status == 200){
+                    localStorage.setItem("token",data);
+                    localStorage.setItem("user",$('#username').val());
+                    window.location.href=dmsUIBaseUrl + "/search.html?user=" + $('#username').val();
+                 }
+              },
+              error: function(jqXHR, textStatus, errorThrown){
+                alert("Login error");
+              }
+          }  );
+       });
+      });
+
+      $('#logout').click(function(){
+        $.ajax(dmsRestUrl + '/logout' , {
+          type:'GET',
+          success: function (data,textStatus, xhr){
+                 console.log(xhr.status);
+                 if(xhr.status == 200){
+                    window.location.href=dmsUIBaseUrl + "/login.html";
+                 }
+              }
+        });
+      });
+    </script>
+</body>
+</html>

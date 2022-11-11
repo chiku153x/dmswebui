@@ -1,53 +1,54 @@
 var dataTableObj;
-// function getData(number){
-//     $.getJSON(dmsRestUrl + '/api/v1/document/search/' + number, {q:'0987654321'}, function (data, textStatus, jqXHR){
-//         var tbl = "<tbody>";
-//         var i = 1;
-//         for(let x in data){
-//             var d = data[x];
-//             var j = JSON.stringify(d);
-//             tbl = tbl + "<tr><td>"+i+"</td><td>"+d['objectNumber']+"</td><td>"+d['screen']+"</td><td>"+d['category']+"</td><td>"+d['subject']+"</td><td>"+d['docName']+"</td><td>"+d['createdDate']+"</td><td class='custom-link' onClick='openDoc("+j+")'>view</td></tr>";
-//             console.log(d);
-//             i++;
-//         }
-//         $("#data").html(tbl);
-//     });
-// }
-
-
-
 
 $('#btnload').click(function(){
-    var searchText = $('#screen').val() + "~" + $('#filename').val() + "~" + $('#filetype').val() + "~" + $('#objno').val() + "~" + $('#datefrom').val() + "~" + $('#dateto').val() + "~" + $('#category').val() + "~" + $('#subject').val() + "~" + $('#keywords').val() + "~END";
-    if(searchText == ""){ searchText = "ALL";}
-    dataTableObj.destroy();
-    dataTableObj = $('#dataTable').DataTable(
-        {
-            ajax: dmsRestUrl + '/api/v1/document/search/' + searchText ,
-            "oLanguage": {
-
-                "sSearch": "Filter :"
-                
+    if($('#screen').val() < 0){
+        alert("Select Screen");
+    }else{
+        var searchText = $('#screen').val() + "~" + $('#filename').val() + "~" + $('#filetype').val() + "~" + $('#objno').val() + "~" + $('#datefrom').val() + "~" + $('#dateto').val() + "~" + $('#category').val() + "~" + $('#subject').val() + "~" + $('#keywords').val() + "~END";
+        if(searchText == ""){ searchText = "ALL";}
+        dataTableObj.destroy();
+        dataTableObj = $('#dataTable').DataTable(
+            {
+                "ajax": { 
+                    url : dmsRestUrl + '/api/v1/document/search/' + searchText ,
+                    type: "GET",
+                    headers: {'Authorization':'Bearer ' + localStorage.getItem('token')}
                 },
-        }
-    );
+                "oLanguage": {
+                    "sSearch": "Filter :"
+                },
+            }
+        );
+    }
 });
 
 $(document).ready(function() {
     $('#mandantName').text(dmsMandant);
     var urlParams = new URLSearchParams(window.location.search);
     $('#userName').text(urlParams.get('user'));
+
+    
     dataTableObj = $('#dataTable').DataTable(
         {
-            ajax: dmsRestUrl + '/api/v1/document/search/-1~~-1~~~~~~~~END' ,
+            "ajax": {
+                url: dmsRestUrl + '/api/v1/document/search/1000~~-1~~~~~~~~END' ,
+                type: "GET",
+                headers: {'Authorization':'Bearer ' + localStorage.getItem('token')}
+            },
             "oLanguage": {
-
                 "sSearch": "Filter :"
-                
-                },
+            },
         }
     );
+    
 
+    $.ajaxSetup(
+        {
+            headers : {
+                'Authorization':'Bearer ' + localStorage.getItem('token')
+            }
+        }
+    );
     $.getJSON(dmsRestUrl + '/api/v1/screen/get', {q:'0987654321'}, function (sdata, stextStatus, sjqXHR){
         
         $.getJSON(dmsRestUrl + '/api/v1/permission/get/' +urlParams.get('user'), {q:'0987654321'}, function (data, textStatus, jqXHR){
@@ -63,7 +64,7 @@ $(document).ready(function() {
             $("#screen_pl").html(tbl);
         });
         
-    });
+    }).fail(function() { window.location.href=dmsUIBaseUrl + "/login.html"; });
 
     
 
@@ -97,7 +98,8 @@ $('#btnclear').click(function(){
     $('#datefrom').daterangepicker(
         {
             locale: {
-              format: 'YYYY-MM-DD'
+              format: 'YYYY-MM-DD',
+              cancelLabel: 'Clear'
             },
             singleDatePicker: true,
             showDropdowns: true,
@@ -106,16 +108,26 @@ $('#btnclear').click(function(){
      $('#dateto').daterangepicker(
         {
             locale: {
-              format: 'YYYY-MM-DD'
+              format: 'YYYY-MM-DD',
+              cancelLabel: 'Clear'
             },
             singleDatePicker: true,
             showDropdowns: true,
         }
      );
+     $('#datefrom').val('');
+     $('#dateto').val('');
 });
 
 
 function screenChange(obj){
+    $.ajaxSetup(
+        {
+            headers : {
+                'Authorization':'Bearer ' + localStorage.getItem('token')
+            }
+        }
+    );
     $.getJSON(dmsRestUrl + '/api/v1/type/get/' , {q:'0987654321'}, function (tdata, ttextStatus, tjqXHR){
         var tbl = '<select id="category" class="form-control"><option selected value="-1">Choose...</option>';
         var i = 1;
@@ -132,3 +144,8 @@ function screenChange(obj){
         $("#category_pl").html(tbl);
     });
   }
+
+
+$('#forceRefresh').click(function(){
+    location.reload(true);
+});

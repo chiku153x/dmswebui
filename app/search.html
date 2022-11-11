@@ -4,7 +4,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/stylesearch.css">
@@ -13,16 +14,24 @@
     <!-- <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet"> -->
     <title>DMS | Search</title>
     <style>
-      .bt{float:right;background-color: #343a40!important;color: #fff!important;}
-      .page-item.active .page-link {background-color: #343a40!important;color: #fff!important;}
+      .bt{float:right;background-color: #1bbba4!important;color: #fff!important;}
+      .page-item.active .page-link {background-color: #1bbba4!important;color: #fff!important;}
+      .upperc{text-transform: uppercase;}
+      #logout{cursor: pointer;}
+      #dataTable > thead > tr:first-child {
+        background-color: #1bbba4!important;color: #fff!important;
+      }
+      #mandantName{
+        color: #1bbba4!important
+      }
     </style>
   </head>
   <body>
 
   <!-- Nav bar starts -->
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <a class="navbar-brand" href="#">DMS</a>
-    <div class="top-right-nav"><strong id="mandantName"></strong> | <strong id="userName"></strong></div>
+    <a class="navbar-brand" href="#">DMS&nbsp;<strong id="mandantName" style="font-size: 10px;"></strong></a>
+    <div class="top-right-nav upperc"><strong id="userName"></strong> | <strong id="logout">Logout</strong></div>
   </nav>
   <!-- Nave bar ends -->
 
@@ -32,7 +41,7 @@
       <form style="width:100%">
           <div class="form-row">
             <div class="form-group col-md-4">
-              <label for="screen">Screen</label>
+              <label for="screen" id="forceRefresh">Screen</label>
               <div id='screen_pl'></div>
             </div>
 
@@ -83,11 +92,11 @@
             </div>
             <div class="form-group col-md-4">
               <label for="datefrom">Date From</label>
-              <input type="text" class="form-control" id="datefrom" placeholder="Date From" >
+              <input type="text" class="form-control" id="datefrom" class="date_range_picker" placeholder="Date From" >
             </div>
             <div class="form-group col-md-4">
               <label for="dateto">Date To</label>
-              <input type="text" class="form-control" id="dateto" placeholder="Date To" >
+              <input type="text" class="form-control" id="dateto" class="date_range_picker" placeholder="Date To" >
             </div>
           </div>
 
@@ -101,7 +110,7 @@
               &nbsp;
             </div>
             <div class="form-group col-md-4">
-              <input type="button" class="form-control col-md-4 bt" id="btnload" value="Load" >
+              <input type="button" class="form-control col-md-4 bt" id="btnload" value="Load" > &nbsp;&nbsp;
               <input type="button" class="form-control col-md-4 bt" id="btnclear" value="Clear" >
             </div>
           </div>
@@ -149,7 +158,7 @@
     <script src="js/url-search-params.js"></script>
     <script src="js/pdfobject.min.js"></script>
     <script src="js/app-constant.js"></script>
-    <script src="js/search.js?v1.0"></script>
+    <script src="js/search.js?v1.2"></script>
     <script type="text/javascript" src="js/moment.min.js"></script>
     <script type="text/javascript" src="js/daterangepicker.js"></script>
 
@@ -159,7 +168,8 @@
         $('#datefrom').daterangepicker(
           {
               locale: {
-                format: 'YYYY-MM-DD'
+                format: 'YYYY-MM-DD',
+                cancelLabel: 'Clear'
               },
               singleDatePicker: true,
               showDropdowns: true,
@@ -168,12 +178,46 @@
        $('#dateto').daterangepicker(
           {
               locale: {
-                format: 'YYYY-MM-DD'
+                format: 'YYYY-MM-DD',
+                cancelLabel: 'Clear'
               },
               singleDatePicker: true,
               showDropdowns: true,
+              
+              
           }
        );
+
+
+       $('#datefrom').val('');
+       $('#dateto').val('');
+
+       $('#datefrom').blur(function(){
+         if($(this).val() == ''){
+           $(this).val('');
+         }
+       });
+
+       $('#dateto').blur(function(){
+         if($(this).val() == ''){
+           $(this).val('');
+         }
+       });
+
+        $('#logout').click(function(){
+            // $.ajax(dmsRestUrl + '/logout' , {
+            //   type:'GET',
+            //   success: function (data,textStatus, xhr){
+            //         console.log(xhr.status);
+            //         if(xhr.status == 200){
+            //             window.location.href=dmsUIBaseUrl + "/login.html";
+            //         }
+            //       }
+            // });
+            localStorage.clear();
+            window.location.href=dmsUIBaseUrl + "/login.html";
+        });
+
       });
     </script>
 </body>

@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
-if [[ -z "${D_TAG_VERSION}" ]]; then
-	TAG=dmswebui:latest
-else
-	TAG=dmswebui:${D_TAG_VERSION}
-fi
-docker build -t ${TAG} .
+
+TAG=chiku153/dmsui:v.023
+#TAG=synchrorkkk/dmsui:v.009
+
+docker buildx build --platform=linux/amd64,linux/arm64 -t ${TAG}  ${tag} --push .
